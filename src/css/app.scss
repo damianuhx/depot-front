@@ -1,0 +1,19 @@
+// app global css in SCSS form
+
+.d-maxwidth-md {
+  max-width: 20rem;
+}
+
+.d-fullwidth {
+  width: 100%;
+  max-width: 100%;
+}
+
+.no-border{
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+@media print {
+  .q-header, .q-tabs, .noprint {display: none}
+}
