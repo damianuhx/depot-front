@@ -2,7 +2,7 @@
 <<<<<<< HEAD
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is the front-end part of a RESTful application to organise ordering food for a group of people. The back-end part of this application can be found [here](https://github.com/damianuhx/depot).
 
 ### What is this repository for? ###
 
