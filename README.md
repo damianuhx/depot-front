@@ -1,34 +1,17 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # README #
 
-This is the front-end part of a RESTful application to organise ordering food for a group of people. The back-end part of this application can be found [here](https://github.com/damianuhx/depot).
+* This app was developed for a group of people that want to order food regularly that is not available in common food shops. So the shopping lists of the members are collected once a month and then big orders at different food producers are made. This app lets users create their shopping lists and creates order lists for the food producers automatically.
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This is the front-end part of a RESTful application to organise ordering food for a group of people. The back-end part of this application can be found [here](https://github.com/damianuhx/depot). 
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* This is a node app built with quasar. Read below how to install a Quasar app using yarn.
+* The only variable that must be changed in order to run on your server is baseURL in src/boot/axios.js. Define the URL to the app here.
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
 =======
 =======
 >>>>>>> f926d9c (test3)
