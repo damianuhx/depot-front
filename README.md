@@ -1,6 +1,6 @@
 # README #
 
-* This app was developed for a group of people that want to order food regularly that is not available in common food shops. So the shopping lists of the members are collected once a month and then big orders at different food producers are made. This app lets users create their shopping lists and creates order lists for the food producers automatically.
+This app was developed for a group of people that want to order food regularly that is not available in common food shops. So the shopping lists of the members are collected once a month and then big orders at different food producers are made. This app lets users create their shopping lists and creates order lists for the food producers automatically.
 
 ### What is this repository for? ###
 
