@@ -3,8 +3,7 @@ import axios from "axios";
 import { Notify } from "quasar";
 
 const api = axios.create({
-  //baseURL: "http://localhost:8888/depot/",
-  baseURL: "https://bestellen-api.livingroom-winterthur.ch/",
+  baseURL: "https://urlofthebackend.org/", //change the url to your backend here
 });
 
 const datian={
