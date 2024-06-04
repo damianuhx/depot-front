@@ -13,9 +13,6 @@ token: 'yehFFdo78LopIBZJvjIHsYu2tvc5mhKu3eCZ0rVvXMBXvhpmeW',
 
 update: function (object, path) {
   //update
-  console.log('CREATE');
-    console.log(path);
-    console.log(object);
   api.patch(path, object, {headers: { 'Authorization': this.token } }
   ).then(res => {
     api.get(path+'//'+object.id).then((res) => {
