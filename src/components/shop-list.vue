@@ -68,7 +68,7 @@
     <span clickable v-for="(product, i) in supplier.product" :key="i" >
       <q-item v-if="(!data.only_added || product.order_product.oquantity>0) && (product.available || (product.order_product.oquantity>0 && !data.is_active)) " >
 
-        <div style="width: 240px; margin-top: 15px" class=" q-mr-lg">{{product.name}}:</div>
+        <div style="width: 240px; margin-top: 15px" class=" q-mr-lg">{{product.name}} :</div>
         <div style="text-align: right; width: 150px; margin-top: 15px" class=" q-mr-lg">{{product.unit}} = CHF {{datian.round(product.price)}}{{(product.split>0) ? '*' : ''}}</div><div v-if="typeof props.user !== 'undefined' && props.user.is_member>0" style="margin-right: 15px; text-align: right; width: 40px; margin-top: 15px; ">({{product.discount}}%)</div>
         <div style="font-size: 24px; padding: 5px;" v-if="!data.is_active">{{product.order_product.quantity}}</div>
         <q-input v-else-if="product.split>0" step="0.01"  style="width: 80px" :dense="true" outlined v-model="product.order_product.quantity" type="number" label="quantity" />

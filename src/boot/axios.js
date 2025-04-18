@@ -2,10 +2,10 @@ import { boot } from "quasar/wrappers";
 import axios from "axios";
 import { Notify } from "quasar";
 
-const baseURL = "https://urlofthebackend.org/" //change the url to your backend here
+const baseURL = "https://bestellen-api.livingroom-winterthur.ch/" //change the url to your backend here
 
 const api = axios.create({
-  baseURL: baseURL, 
+  baseURL: baseURL,
 });
 
 const datian={
