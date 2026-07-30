@@ -5,7 +5,7 @@
 
         <q-toolbar-title> LebensmittelDepot </q-toolbar-title>
 
-        <div>Version 0.6</div>
+        <div>Version 0.7</div>
       </q-toolbar>
     </q-header>
 

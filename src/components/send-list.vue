@@ -33,7 +33,6 @@ const data = reactive({
 });
 
 
-
 onBeforeMount(()=>{
   api.get('supplier', {headers: { 'Authorization': datian.token }}).then((res) => {
       data.suppliers=res.data.data.supplier;
@@ -63,9 +62,10 @@ onMounted(() => {
 const load = () => {
   axios.request({
 	"method": "GET",
-	"url": "https://bestellen-api.livingroom-winterthur.ch/ssupplier//"+data.selected_order.id+'/'+data.selected_supplier.id, //add user and order
+	"url": datian.baseURL+"ssupplier//"+data.selected_order.id+'/'+data.selected_supplier.id, //add user and order
 	"headers": {
-		"Content-Type": "application/json; charset=utf-8"
+		"Content-Type": "application/json; charset=utf-8",
+    'Authorization': datian.token
 	}
 }).then( (result) => {
 

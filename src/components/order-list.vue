@@ -10,8 +10,6 @@
 
           <q-item-section style="max-width: 40px">
             <q-checkbox
-            true-value="1"
-            false-value="0"
             v-model="order.active" />
             <q-btn color="primary" icon="las la-paper-plane" @click="sendmails(order.id);" v-if="order.id" />
           </q-item-section><q-item-section>order_date
@@ -70,7 +68,7 @@ load();
 const load = () => {
   api.get("order", {headers: { 'Authorization': datian.token }}).then((res) => {
   data.order = res.data.data.order;
-  data.order.push({name: "", active: "", order_date: "", collect_date: "", });
+  data.order.push({name: "", active: false, order_date: "", collect_date: "", });
 });}
 
 const sendmails = (id) => {

@@ -10,22 +10,16 @@
           <q-item-section style="max-width: 40px">
             Überprüft
             <q-checkbox
-            true-value="1"
-            false-value="0"
             v-model="da_user.is_validated" />
           </q-item-section>
           <q-item-section style="max-width: 40px">
             Mitglied
             <q-checkbox
-            true-value="1"
-            false-value="0"
             v-model="da_user.is_member" />
           </q-item-section>
           <q-item-section style="max-width: 40px">
           Administrator
             <q-checkbox
-            true-value="1"
-            false-value="0"
             v-model="da_user.is_admin" />
           </q-item-section>
           <q-item-section>

@@ -2,7 +2,14 @@ import { boot } from "quasar/wrappers";
 import axios from "axios";
 import { Notify } from "quasar";
 
-const baseURL = "https://bestellen-api.livingroom-winterthur.ch/" //change the url to your backend here
+const runtimeConfig =
+  typeof window !== "undefined" && window.__APP_CONFIG__
+    ? window.__APP_CONFIG__
+    : {};
+const baseURL =
+  runtimeConfig.API_BASE_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://localhost:8860/";
 
 const api = axios.create({
   baseURL: baseURL,
@@ -10,13 +17,22 @@ const api = axios.create({
 
 const datian={
 baseURL: baseURL,
-token: 'yehFFdo78LopIBZJvjIHsYu2tvc5mhKu3eCZ0rVvXMBXvhpmeW',
+token: '',
+
+setToken: function (token) {
+  this.token = token || '';
+  if (this.token) {
+    api.defaults.headers.common.Authorization = this.token;
+  } else {
+    delete api.defaults.headers.common.Authorization;
+  }
+},
 
 update: function (object, path) {
   //update
   api.patch(path, object, {headers: { 'Authorization': this.token } }
   ).then(res => {
-    api.get(path+'//'+object.id).then((res) => {
+    api.get(path+'//'+object.id, {headers: { 'Authorization': this.token }}).then((res) => {
       object = res.data.data;
     });
   })},

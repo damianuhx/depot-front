@@ -13,6 +13,14 @@ const { configure } = require('quasar/wrappers');
 
 
 module.exports = configure(function (/* ctx */) {
+  const devHost = process.env.HOST || 'localhost';
+  const devPort = process.env.PORT ? Number(process.env.PORT) : 8080;
+  const hmrClientPort = process.env.HMR_CLIENT_PORT ? Number(process.env.HMR_CLIENT_PORT) : null;
+  const hmrHost = process.env.HMR_HOST;
+  const devServerHmr = hmrClientPort
+    ? { clientPort: hmrClientPort, ...(hmrHost ? { host: hmrHost } : {}) }
+    : undefined;
+
   return {
     eslint: {
       // fix: true,
@@ -89,7 +97,10 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: true // opens browser window automatically
+      open: true, // opens browser window automatically
+      host: devHost,
+      port: devPort,
+      hmr: devServerHmr
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

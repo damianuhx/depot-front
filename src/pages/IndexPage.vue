@@ -93,7 +93,7 @@ Wenn Du Dich einmal registriert hast, mit Name, E-Mail-Adresse, Password und Tel
 <br/>
 Deine Bestellung kannst Du bis Ende der Bestellfrist ergänzen/verändern. Ist die Bestellfrist abgelaufen, bekommst Du eine Bestätigung für Deine Bestellung.<br/>
 <br/>
-Sollte es Probleme mit dieser Software geben, kannst Du alternativ eine <a href="https://bestellen-api.livingroom-winterthur.ch/printlist">druckbare Liste aller Produkte hier </a>. Schicke diese Liste dann ausgefüllt (als PDF oder ausgedruckt) an depot@livingroom-winterthur.ch<br/>
+Sollte es Probleme mit dieser Software geben, kannst Du alternativ eine <a :href="printlistUrl">druckbare Liste aller Produkte hier </a>. Schicke diese Liste dann ausgefüllt (als PDF oder ausgedruckt) an depot@livingroom-winterthur.ch<br/>
 <br/>
 Wir wünschen Dir viel Vergnügen an unseren Produkten und freuen uns, Dich bei uns im Depot begrüssen zu dürfen!<br/>
 <br/>
@@ -127,13 +127,32 @@ const load = () => {
   //
 }
 
+const setSessionToken = (token) => {
+  datian.setToken(token);
+  if (token){
+    Cookies.set('token', token);
+  }
+  else{
+    Cookies.remove('token');
+  }
+};
+
 const login = () => {
-  Cookies.set('mail', data.user.mail);
-  Cookies.set('password', data.user.password);
-  api.post("user/login", data.user).then((res) => {
-    data.user = res.data.data.user;
-    datian.token = res.data.data.user.token;
-});
+  const mail = (data.user.mail || '').trim();
+  const password = data.user.password || '';
+  Cookies.set('mail', mail);
+  Cookies.set('password', password);
+  api.post("user/login", { mail: mail, password: password }).then((res) => {
+    const user = res.data?.data?.user || {};
+    if (user && user.token){
+      data.user = user;
+      setSessionToken(user.token);
+    }
+    else{
+      data.user = { mail: mail, password: password, valid: false };
+      setSessionToken('');
+    }
+  });
 }
 
 const register = () => {
@@ -145,12 +164,37 @@ const register = () => {
 const debug = () => {
   console.log(data);
 }
+const runtimeConfig =
+  typeof window !== "undefined" && window.__APP_CONFIG__
+    ? window.__APP_CONFIG__
+    : {};
+const printlistUrl =
+  runtimeConfig.PRINTLIST_URL ||
+  import.meta.env.VITE_PRINTLIST_URL ||
+  "http://localhost:8860/printlist";
 onMounted(() => {
-  const cookies = Cookies.getAll();
-  if (typeof cookies.mail !== 'undefined'){
-    data.user.mail= cookies.mail.replace("%40", '@') || ''; //%40
+  const mail = Cookies.get('mail');
+  const password = Cookies.get('password');
+  if (typeof mail === 'string'){
+    data.user.mail = mail;
   }
-  data.user.password=cookies.password || '';
+  if (typeof password === 'string'){
+    data.user.password = password;
+  }
+
+  const token = Cookies.get('token');
+  if (typeof token === 'string' && token.length){
+    datian.setToken(token);
+    api.get("user/me", {headers: { 'Authorization': token }}).then((res) => {
+      data.user = res.data?.data?.user || {};
+      if (!data.user.token){
+        setSessionToken('');
+      }
+    }).catch(() => {
+      setSessionToken('');
+      data.user = { mail: mail || '', password: password || '', valid: false };
+    });
+  }
   load();
 });
 

@@ -186,7 +186,8 @@ const active = () => {
 const logout = () => {
   Cookies.set('mail', '');
   Cookies.set('password', '');
-  datian.token = '';
+  Cookies.remove('token');
+  datian.setToken('');
   location.reload();
 };
 

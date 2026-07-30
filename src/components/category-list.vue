@@ -7,6 +7,11 @@
           <q-item-section>
               <q-input outlined v-model="category.name" label="name" />
           </q-item-section>
+
+          <q-item-section style="max-width: 100px">
+              <q-input outlined v-model="category.position" type="number" label="position" />
+          </q-item-section>
+
           <q-item-section side>
 <q-btn color="primary" icon="edit" @click="datian.update(category, 'category')" v-if="category.id" />
 <q-btn color="positive" icon="add" @click="datian.create(category, 'category', data.category)" v-else />

@@ -23,6 +23,17 @@
           <q-item-section>
               <q-input outlined v-model="supplier.email" label="email" />
           </q-item-section>
+
+          <q-item-section style="max-width: 80px">
+          verfügbar
+            <q-checkbox
+            v-model="supplier.available" />
+          </q-item-section>
+
+          <q-item-section style="max-width: 100px">
+              <q-input outlined v-model="supplier.position" type="number" label="position" />
+          </q-item-section>
+
           <q-item-section side>
 <q-btn color="primary" icon="edit" @click="datian.update(supplier, 'supplier')" v-if="supplier.id" />
 <q-btn color="positive" icon="add" @click="datian.create(supplier, 'supplier', data.supplier)" v-else />
@@ -43,6 +54,6 @@ load();
 const load = () => {
     api.get("supplier", {headers: { 'Authorization': datian.token }}).then((res) => {
       data.supplier = res.data.data.supplier;
-      data.supplier.push({name: "", address: "", city: "", phone: "", email: "", });
+      data.supplier.push({name: "", address: "", city: "", phone: "", email: "", available: true, });
     });}
 </script>
